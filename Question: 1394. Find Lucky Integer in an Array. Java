@@ -1,0 +1,46 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class LuckyInteger {
+    
+    public static int findLucky(int[] arr) {
+        // Create a HashMap to store the frequency of each element
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        
+        // Count the frequency of each element in the array
+        for (int num : arr) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+        }
+        
+        // Initialize a variable to keep track of the largest lucky integer
+        int largestLucky = -1;
+        
+        // Iterate over the frequency map to find the lucky integer
+        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
+            int key = entry.getKey();
+            int value = entry.getValue();
+            
+            // A lucky integer is one where the value equals the frequency
+            if (key == value) {
+                largestLucky = Math.max(largestLucky, key);
+            }
+        }
+        
+        // Return the largest lucky integer, or -1 if none is found
+        return largestLucky;
+    }
+
+    public static void main(String[] args) {
+        // Test case 1
+        int[] arr1 = {2, 2, 3, 4};
+        System.out.println(findLucky(arr1));  // Output: 2
+
+        // Test case 2
+        int[] arr2 = {1, 2, 2, 3, 3, 3};
+        System.out.println(findLucky(arr2));  // Output: 3
+
+        // Test case 3
+        int[] arr3 = {2, 2, 2, 3, 3};
+        System.out.println(findLucky(arr3));  // Output: -1
+    }
+}
